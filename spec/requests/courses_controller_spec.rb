@@ -29,18 +29,18 @@ RSpec.describe 'Course', type: :request do
     end
   end
 
-  describe "POST /courses" do
+  describe "POST /course" do
     context "with valid parameters" do
       let(:valid_params) { { name: "Mathematics", code: "MATH101", active: true, "tutors_attributes": [{ "first_name": "vinay", "last_name": "shah", "phone_number": "9889176210" }] }}
 
       it "creates a new course and it's tutor" do
         expect {
-          post '/api/v1/courses', params: { course: valid_params }
+          post '/api/v1/course', params: { course: valid_params }
         }.to change(Course, :count).by(1).and(change(Tutor, :count).by(1))
       end
 
       it "returns the newly created course" do
-        post '/api/v1/courses', params: { course: valid_params }
+        post '/api/v1/course', params: { course: valid_params }
 
         expect(response).to have_http_status(:success)
 
@@ -57,12 +57,12 @@ RSpec.describe 'Course', type: :request do
 
       it "does not create a new course" do
         expect {
-          post '/api/v1/courses', params: { course: invalid_params }
+          post '/api/v1/course', params: { course: invalid_params }
         }.to_not change(Course, :count)
       end
 
       it "returns the errors" do
-        post '/api/v1/courses', params: { course: invalid_params }
+        post '/api/v1/course', params: { course: invalid_params }
         course = Course.new 
         course.save
         

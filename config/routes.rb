@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'courses/', to: "courses#index"
-      post 'courses/', to: "courses#create"
+      post 'course/', to: "courses#create"
       get 'tutors/', to: "courses#show_tutor"
     end
   end
